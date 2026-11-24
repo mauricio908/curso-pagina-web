@@ -101,9 +101,11 @@ export default function AuthPage({
     <div className="auth-page-container">
       <div className="auth-card">
         {/* Selector de Pestañas Login / Registro */}
-        <div className="auth-tabs">
+        <div className="auth-tabs" role="tablist" aria-label="Modo de autenticación">
           <button
             type="button"
+            role="tab"
+            aria-selected={mode === 'login'}
             className={`auth-tab ${mode === 'login' ? 'active' : ''}`}
             onClick={() => {
               setMode('login');
@@ -114,6 +116,8 @@ export default function AuthPage({
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={mode === 'register'}
             className={`auth-tab ${mode === 'register' ? 'active' : ''}`}
             onClick={() => {
               setMode('register');
@@ -128,19 +132,20 @@ export default function AuthPage({
         {mode === 'login' ? (
           <div className="auth-form-wrapper">
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '8px' }}>🔐</div>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }} aria-hidden="true">🔐</div>
               <h2 style={{ fontSize: '26px', color: 'white' }}>Bienvenido a ÉLIXIR</h2>
-              <p style={{ fontSize: '13px', color: '#94a3b8', marginTop: '4px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                 Ingresa tus credenciales para acceder a la sección privada de envíos y ofertas exclusivas.
               </p>
             </div>
 
-            {loginError && <div className="auth-alert error">{loginError}</div>}
+            {loginError && <div className="auth-alert error" role="alert">{loginError}</div>}
 
             <form onSubmit={handleLoginSubmit} className="auth-form">
               <div>
-                <label className="auth-label">Correo Electrónico</label>
+                <label className="auth-label" htmlFor="login-email">Correo Electrónico</label>
                 <input
+                  id="login-email"
                   type="email"
                   required
                   placeholder="ejemplo@correo.com"
@@ -152,8 +157,9 @@ export default function AuthPage({
               </div>
 
               <div>
-                <label className="auth-label">Contraseña</label>
+                <label className="auth-label" htmlFor="login-password">Contraseña</label>
                 <input
+                  id="login-password"
                   type="password"
                   required
                   placeholder="••••••••"
@@ -171,7 +177,7 @@ export default function AuthPage({
               <button
                 type="button"
                 className="btn-outline-gold"
-                style={{ width: '100%', justifyContent: 'center', borderColor: '#d4af37', fontSize: '13px' }}
+                style={{ width: '100%', justifyContent: 'center', borderColor: 'var(--gold-primary)', fontSize: '13px' }}
                 onClick={handleQuickDemo}
               >
                 ⚡ Acceso Rápido con Cuenta Demo
@@ -193,20 +199,21 @@ export default function AuthPage({
           /* Formulario de Registro */
           <div className="auth-form-wrapper">
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '8px' }}>💎</div>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }} aria-hidden="true">💎</div>
               <h2 style={{ fontSize: '26px', color: 'white' }}>Membresía Exclusiva</h2>
-              <p style={{ fontSize: '13px', color: '#94a3b8', marginTop: '4px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                 Crea tu cuenta para desbloquear el portal privado de envíos, tracking satelital y muestras de regalo.
               </p>
             </div>
 
-            {regError && <div className="auth-alert error">{regError}</div>}
-            {regSuccess && <div className="auth-alert success">{regSuccess}</div>}
+            {regError && <div className="auth-alert error" role="alert">{regError}</div>}
+            {regSuccess && <div className="auth-alert success" role="status">{regSuccess}</div>}
 
             <form onSubmit={handleRegisterSubmit} className="auth-form">
               <div>
-                <label className="auth-label">Nombre Completo</label>
+                <label className="auth-label" htmlFor="reg-name">Nombre Completo</label>
                 <input
+                  id="reg-name"
                   type="text"
                   required
                   placeholder="Ej. Julian Alva"
@@ -218,8 +225,9 @@ export default function AuthPage({
               </div>
 
               <div>
-                <label className="auth-label">Correo Electrónico</label>
+                <label className="auth-label" htmlFor="reg-email">Correo Electrónico</label>
                 <input
+                  id="reg-email"
                   type="email"
                   required
                   placeholder="julian@correo.com"
@@ -232,8 +240,9 @@ export default function AuthPage({
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
-                  <label className="auth-label">Contraseña</label>
+                  <label className="auth-label" htmlFor="reg-pwd">Contraseña</label>
                   <input
+                    id="reg-pwd"
                     type="password"
                     required
                     placeholder="Mínimo 6 carácteres"
@@ -244,8 +253,9 @@ export default function AuthPage({
                   />
                 </div>
                 <div>
-                  <label className="auth-label">Confirmar Contraseña</label>
+                  <label className="auth-label" htmlFor="reg-confirm">Confirmar Contraseña</label>
                   <input
+                    id="reg-confirm"
                     type="password"
                     required
                     placeholder="Repite la contraseña"
@@ -258,8 +268,9 @@ export default function AuthPage({
               </div>
 
               <div>
-                <label className="auth-label">Preferencia Olfativa Principal</label>
+                <label className="auth-label" htmlFor="reg-pref">Preferencia Olfativa Principal</label>
                 <select
+                  id="reg-pref"
                   className="search-input"
                   style={{ width: '100%', paddingLeft: '14px', background: '#0e111a', color: 'white' }}
                   value={regPreference}
@@ -295,7 +306,7 @@ export default function AuthPage({
             type="button"
             className="link-button"
             onClick={onNavigateShop}
-            style={{ color: '#94a3b8', fontSize: '13px' }}
+            style={{ color: 'var(--text-muted)', fontSize: '13px' }}
           >
             ← Volver a la Tienda Principal
           </button>

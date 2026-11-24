@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "storefront-best-practices": {
+      "source": "medusajs/medusa-agent-skills",
+      "commit": "c5a56b4646b2c39d49b1da10c8a5404236b6b4ba",
+      "sourceType": "github",
+      "skillPath": "plugins/ecommerce-storefront/skills/storefront-best-practices/SKILL.md",
+      "computedHash": "13b1696bf28003f63d27374cd12796d3207b92141098b6945ddaffeac422e407"
+    }
+  }
+}
